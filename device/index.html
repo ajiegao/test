@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body, #con {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #con {
+            background-image: url(./in.jpg);
+            background-position: 768px 654.5px;
+        }
+    </style>
+</head>
+<body>
+<div id="con">
+    alpha:<span id="alpha"></span><br/>
+    beta:<span id="beta"></span><br/>
+    gamma:<span id="gamma"></span><br/>
+    x:<span id="x"></span><br/>
+    y:<span id="y"></span><br/>
+</div>
+</body>
+<script>
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', function (event) {
+            var a = document.getElementById('alpha'),
+                b = document.getElementById('beta'),
+                g = document.getElementById('gamma'),
+                x = document.getElementById('x'),
+                y = document.getElementById('y'),
+                alpha = event.alpha,
+                beta = event.beta,
+                gamma = event.gamma;
+  
+            a.innerHTML = Math.round(alpha);
+            b.innerHTML = Math.round(beta);
+            g.innerHTML = Math.round(gamma);
+
+            const con = document.getElementById('con');
+            xdis = 768 + (Math.round(alpha) * 4)
+            ydis = 654.5 + (Math.round(beta) * 4)
+            x.innerHTML = Math.round(xdis);
+            y.innerHTML = Math.round(ydis);
+            
+            
+            con.style.backgroundPosition = `${xdis}px ${ydis}px`
+
+            // 1536 1309
+        }, false);
+    } else {
+        // document.querySelector('body').innerHTML = '你的浏览器不支持陀螺仪';
+    }
+</script>
+</html>
